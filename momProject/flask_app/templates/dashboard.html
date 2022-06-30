@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/style.css">
+    <title>Dashboard</title>
+</head>
+<body class="backg">
+    <div class="container backg w-auto">
+        <div>
+            <nav class="d-flex justify-content-around text-center col-12">
+                <div>
+                    <h1 class="text-light text-center">Hello, {{user.first_name}}!</h1>
+                </div>
+                <div>
+                    <a href="/logout" class="btn btn-info">Logout</a>
+                </div>
+            </nav>
+        </div>
+        <hr>
+        <div class="container col-8 mx-auto text-center body w-auto h-100">
+            <h1 class="text-center text-info">Your RSVP'd Events:</h1>
+            <div class="row justify-content-center text-center">
+            <table class="text-center">
+                <thead>
+                    <tr class="text-center bg-transparent text-light">
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Age Range</th>
+                        <th>Contact Number</th>
+                    </tr>
+                </thead>
+            </div>
+            <div class="col-10 mx-auto text-light justify-content-around w-auto h-100">
+                <tbody class="text-info">
+                    {% for like in likes %}
+                        <tr>
+                            <td> {{like.name}} </td>
+                            <td> {{like.location}} </td>
+                            <td> {{like.age}} </td>
+                            <td>{{like.contact}}</td>
+                            <td>
+                                {% if like.user_id == session.user_id %}
+                                <a href="/show_event/{{like.id}}">View</a>
+                                <a href="/edit/{{like.id}}">Edit</a>
+                                <a href="/destroy/event/{{like.id}}">Delete</a>
+                                {% elif like.user_id != session.user_id %}
+                                <a href="/show_event/{{like.id}}">View</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </div>
+            </table>
+            <hr>
+    <div>
+        <img src="static/beach.jpg" alt="beach">
+    </div>
+        <div class="col-10 mx-auto my-5 text-dark bg-transparent justify-content-around body w-auto h-100">
+            <h1 class="text-center text-light">All Events</h1>
+            <div class="">
+            <table>
+                <thead>
+                    <tr class="text-info">
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Age Range</th>
+                        <th>Contact Number</th>
+                    </tr>
+                </thead>
+            </div>
+        <div class="col-10 mx-auto my-5 text-info justify-content-around w-auto h-100">
+            <tbody>
+                {% for event in events %}
+                    <tr>
+                        <td class="text-info"> {{event.name}} </td>
+                        <td class="text-info"> {{event.location}} </td>
+                        <td class="text-info"> {{event.age}} </td>
+                        <td class="text-info">{{event.contact}}</td>
+                        <td>
+                            {% if event.user_id == session.user_id %}
+                            <a href="/show_event/{{event.id}}">View</a>
+                            <a href="/edit/{{event.id}}">Edit</a>
+                            <a href="/destroy/event/{{event.id}}">Delete</a>
+                            {% elif event.user_id != session.user_id %}
+                            <a href="/show_event/{{event.id}}">View</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </div>
+        </table>
+    </div>
+    <br>
+        <div class="btn-transparent">
+            <a href="/new" class="btn btn-info">Add an Event</a>
+        </div>
+    </main>
+    </div>
+</body>
+</html>

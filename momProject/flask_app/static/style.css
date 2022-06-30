@@ -1,0 +1,17 @@
+.backg {
+    background-image: url(nightSky.jpg);
+}
+
+.backimg {
+    background-image: url(kids.jpg);
+}
+
+.editImg {
+    background-image: url(nightSky.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.form {
+    text-align: center;
+    width: 700px;
+}
